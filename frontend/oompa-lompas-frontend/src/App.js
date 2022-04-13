@@ -1,9 +1,6 @@
 import React from 'react';
-import Particles from "react-tsparticles";
 import './App.css';
-import particlesOptions from "./particles.json";
 import {Route, Routes} from 'react-router-dom';
-import Navigation from "./components/Navigation";
 import AuthProvider from "./components/AuthProvider";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Admin from "./pages/Admin";
@@ -18,9 +15,6 @@ export default function App() {
 
     return (
         <AuthProvider>
-            <Particles options={particlesOptions}/>
-            <h1>React Router</h1>
-            <Navigation/>
             <Routes>
                 <Route index element={<Login />} />
                 <Route path="login" element={<Login/>}/>
