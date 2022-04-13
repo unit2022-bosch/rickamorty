@@ -5,6 +5,7 @@
   "dependencies": {
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
+    "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
     "react-tsparticles": "^1.43.1",
     "tslib": "^2.3.1",
