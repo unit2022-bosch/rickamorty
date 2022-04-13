@@ -1,40 +1,71 @@
 import React from 'react';
 import Particles from "react-tsparticles";
-import logo from './logo.svg';
 import './App.css';
 import particlesOptions from "./particles.json";
+import {Route, Routes} from 'react-router-dom';
+import Navigation from "./components/Navigation";
+import AuthProvider from "./components/AuthProvider";
+import ProtectedRoute from "./components/ProtectedRoute";
+import Admin from "./pages/Admin";
+import NoMatch from "./pages/NoMatch";
+import Station from "./pages/Station";
+import Stations from "./pages/Stations";
+import Logistic from "./pages/Logistic";
+import Warehouse from "./pages/Warehouse";
+import Login from "./pages/Login";
 
-function App() {
+export default function App() {
+
     return (
-        <div className="App">
+        <AuthProvider>
             <Particles options={particlesOptions}/>
-            <header className="App-header">
-                <img src={logo} className="App-logo" alt="logo"/>
-                <p>
-                    Edit <code>src/App.js</code> and save to reload.
-                </p>
-                <p>
-                    Edit <code>src/particles.json</code> to customize Particles, then save to reload.
-                </p>
-                <a
-                    className="App-link"
-                    href="https://reactjs.org"
-                    target="_blank"
-                    rel="noopener noreferrer"
+            <h1>React Router</h1>
+            <Navigation/>
+            <Routes>
+                <Route index element={<Login />} />
+                <Route path="login" element={<Login/>}/>
+                <Route
+                    path="admin"
+                    element={
+                        <ProtectedRoute>
+                            <Admin/>
+                        </ProtectedRoute>
+                    }
+                />
+                <Route
+                    path="warehouse"
+                    element={
+                        <ProtectedRoute>
+                            <Warehouse/>
+                        </ProtectedRoute>
+                    }
+                />
+                <Route
+                    path="logistic"
+                    element={
+                        <ProtectedRoute>
+                            <Logistic/>
+                        </ProtectedRoute>
+                    }
+                />
+                <Route
+                    path="station"
+                    element={
+                        <ProtectedRoute>
+                            <Stations/>
+                        </ProtectedRoute>
+                    }
                 >
-                    Learn React
-                </a>
-                <a
-                    className="App-link"
-                    href="https://particles.js.org"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    See Particles samples
-                </a>
-            </header>
-        </div>
+                </Route>
+                <Route
+                    path="station/:stationId"
+                    element={
+                        <ProtectedRoute>
+                            <Station/>
+                        </ProtectedRoute>}
+                />
+                <Route path="*" element={<NoMatch/>}/>
+            </Routes>
+        </AuthProvider>
     );
-}
-
-export default App;
+};
